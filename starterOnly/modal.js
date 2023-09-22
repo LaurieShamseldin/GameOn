@@ -55,25 +55,33 @@ function validForm() {
   let formIsValid = true;
   // Vérification que les données sont correctement saisies
   if (firstName.length < 2) {
-    console.log('firstname non valide');
+    dataErrorMessage('first', 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.')
     formIsValid = false;
+  } else {
+    hideDataErrorMessage('first');
   }
 
   if (lastName.length < 2) {
-    console.log("nom non valide");
+    dataErrorMessage('last', 'Veuillez entrer 2 caractères ou plus pour le champ du nom.')
     formIsValid = false;
+  } else {
+    hideDataErrorMessage('last');
   }
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
   if (!emailRegex.test(email)) {
-   console.log("email non valide");
-   formIsValid = false;
+    dataErrorMessage('email', 'Veuillez entrer un email valide.')
+    formIsValid = false;
+  } else {
+    hideDataErrorMessage('email');
   }
 
   if (isNaN(numberCompetition)  || numberCompetition.length <= 0 ) {
-    console.log('chiffe non valide');
+    dataErrorMessage('quantity', 'Veuillez entrer un nombre.')
     formIsValid = false;
+  } else {
+    hideDataErrorMessage('quantity');
   }
 
   let locationChecked = false;
@@ -86,13 +94,17 @@ function validForm() {
   }
 
   if (!locationChecked) {
-    console.log("case non cochée");
+    dataErrorMessage('location', 'Veuillez sélectionner une ville.')
     formIsValid = false;
+  } else {
+    hideDataErrorMessage('location');
   }
 
   if (!cgu.checked) {
-    console.log("cgu non cochée");
+    dataErrorMessage('condition', 'Vous devez vérifier que vous acceptez les termes et conditions.')
     formIsValid = false;
+  } else {
+    hideDataErrorMessage('condition');
   }
 
   return formIsValid;
@@ -100,3 +112,14 @@ function validForm() {
 
 
 
+function dataErrorMessage(nameID, message) {
+  const errorDiv = document.getElementById(`${nameID}-form`);
+  errorDiv.setAttribute('data-error-visible', 'true');
+  errorDiv.setAttribute('data-error', message);
+}
+
+function hideDataErrorMessage(nameDiv) {
+  const errorDiv = document.getElementById(`${nameDiv}-form`);
+  errorDiv.setAttribute('data-error-visible', 'false');
+  errorDiv.removeAttribute('data-error');
+}
