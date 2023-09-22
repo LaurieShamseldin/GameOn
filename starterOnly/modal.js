@@ -16,6 +16,8 @@ const modalClose = document.querySelector(".close");
 
 // Form
 const form = document.querySelector(".form");
+const modalBody = document.querySelector(".modal-body")
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -36,10 +38,15 @@ function closeModal() {
 form.addEventListener("submit", submitForm);
 
 function submitForm(event) {
+  event.preventDefault();
   if (!validForm()) {
     console.log("pas valide");
-    event.preventDefault();
+  
+  } else {
+    form.reset();
+    validateForm();
   }
+
 }
 
 function validForm() {
@@ -110,8 +117,6 @@ function validForm() {
   return formIsValid;
 }
 
-
-
 function dataErrorMessage(nameID, message) {
   const errorDiv = document.getElementById(`${nameID}-form`);
   errorDiv.setAttribute('data-error-visible', 'true');
@@ -122,4 +127,21 @@ function hideDataErrorMessage(nameDiv) {
   const errorDiv = document.getElementById(`${nameDiv}-form`);
   errorDiv.setAttribute('data-error-visible', 'false');
   errorDiv.removeAttribute('data-error');
+}
+
+function validateForm() {
+  form.style.display = "none";
+
+  let thanks = `
+    <div class="thanks-message">
+      Merci !<br>Votre réservation a été reçue.
+    </div>
+
+    <button class="btn-submit close-thanks" type="button">Fermer</button>
+  `;
+
+  modalBody.innerHTML = thanks;
+
+  const closeThanksModal = document.querySelector(".close-thanks");
+  closeThanksModal.addEventListener("click", closeModal);
 }
