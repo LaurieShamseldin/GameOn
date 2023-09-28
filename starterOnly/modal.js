@@ -56,6 +56,7 @@ function validForm() {
   const lastName = document.getElementById("last").value;
   const email = document.getElementById("email").value;
   const numberCompetition = document.getElementById("quantity").value;
+  const dateInput = document.getElementById("birthdate").value;
   const locations = document.getElementsByName("location");
   const cgu = document.getElementById("checkbox1");
 
@@ -82,6 +83,12 @@ function validForm() {
     formIsValid = false;
   } else {
     hideDataErrorMessage('email');
+  }
+
+  if (!dateInput) {
+    dataErrorMessage('data', 'Vous devez entrer votre date de naissance.')
+  } else {
+    hideDataErrorMessage('data');
   }
 
   if (isNaN(numberCompetition)  || numberCompetition.length <= 0 ) {
