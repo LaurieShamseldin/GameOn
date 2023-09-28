@@ -39,17 +39,13 @@ form.addEventListener("submit", submitForm);
 
 function submitForm(event) {
   event.preventDefault();
-  if (!validForm()) {
-    console.log("pas valide");
-  
-  } else {
+  if (isValidForm()) {
     form.reset();
     validateForm();
   }
-
 }
 
-function validForm() {
+function isValidForm() {
 
   // Form elements
   const firstName = document.getElementById("first").value;
