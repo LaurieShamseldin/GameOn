@@ -18,6 +18,8 @@ const modalClose = document.querySelector(".close");
 const form = document.querySelector(".form");
 const modalBody = document.querySelector(".modal-body")
 
+// Thanks message
+const thanksForm = document.querySelector('.thanks-form')
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -25,6 +27,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  form.style.display = "block";
 }
 
 // launch close modal
@@ -33,6 +36,7 @@ modalClose.addEventListener("click", closeModal);
 // Function to modal
 function closeModal() {
   modalbg.style.display = "none";
+  thanksForm.style.display = "none";
 }
 
 form.addEventListener("submit", submitForm);
@@ -83,6 +87,7 @@ function isValidForm() {
 
   if (!dateInput) {
     dataErrorMessage('data', 'Vous devez entrer votre date de naissance.')
+    formIsValid = false;
   } else {
     hideDataErrorMessage('data');
   }
@@ -135,15 +140,7 @@ function hideDataErrorMessage(nameDiv) {
 function validateForm() {
   form.style.display = "none";
 
-  let thanks = `
-    <div class="thanks-message">
-      Merci !<br>Votre réservation a été reçue.
-    </div>
-
-    <button class="btn-submit close-thanks" type="button">Fermer</button>
-  `;
-
-  modalBody.innerHTML = thanks;
+  thanksForm.style.display = "block";
 
   const closeThanksModal = document.querySelector(".close-thanks");
   closeThanksModal.addEventListener("click", closeModal);

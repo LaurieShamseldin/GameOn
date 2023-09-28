@@ -459,6 +459,10 @@ input[data-error]::after {
   margin-top: 59px;
 }
 
+.thanks-form {
+  display:none;
+}
+
 .thanks-message {
   text-align:center;
   line-height: 45px;
