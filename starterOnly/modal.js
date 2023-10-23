@@ -62,6 +62,7 @@ function isValidForm() {
 
   let formIsValid = true;
   // Vérification que les données sont correctement saisies
+  // check that the first name is more than 2 characters long
   if (firstName.length < 2) {
     dataErrorMessage('first', 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.')
     formIsValid = false;
@@ -69,6 +70,7 @@ function isValidForm() {
     hideDataErrorMessage('first');
   }
 
+    // check that the name is more than 2 characters long
   if (lastName.length < 2) {
     dataErrorMessage('last', 'Veuillez entrer 2 caractères ou plus pour le champ du nom.')
     formIsValid = false;
@@ -77,7 +79,7 @@ function isValidForm() {
   }
 
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
+    // check that the email is correct
   if (!emailRegex.test(email)) {
     dataErrorMessage('email', 'Veuillez entrer un email valide.')
     formIsValid = false;
@@ -92,6 +94,7 @@ function isValidForm() {
     hideDataErrorMessage('data');
   }
 
+    //check the number of competitions
   if (isNaN(numberCompetition)  || numberCompetition.length <= 0 ) {
     dataErrorMessage('quantity', 'Veuillez entrer un nombre.')
     formIsValid = false;
@@ -101,6 +104,7 @@ function isValidForm() {
 
   let locationChecked = false;
 
+    // check that a city has been checked
   for (const location of locations) {
     if (location.checked) {
       locationChecked = true;
@@ -115,6 +119,7 @@ function isValidForm() {
     hideDataErrorMessage('location');
   }
 
+    // check that the conditions have been checked
   if (!cgu.checked) {
     dataErrorMessage('condition', 'Vous devez vérifier que vous acceptez les termes et conditions.')
     formIsValid = false;
@@ -125,18 +130,21 @@ function isValidForm() {
   return formIsValid;
 }
 
+// function to display error messages
 function dataErrorMessage(nameID, message) {
   const errorDiv = document.getElementById(`${nameID}-form`);
   errorDiv.setAttribute('data-error-visible', 'true');
   errorDiv.setAttribute('data-error', message);
 }
 
+// function to remove error messages
 function hideDataErrorMessage(nameDiv) {
   const errorDiv = document.getElementById(`${nameDiv}-form`);
   errorDiv.setAttribute('data-error-visible', 'false');
   errorDiv.removeAttribute('data-error');
 }
 
+// function to validate the form and display success message
 function validateForm() {
   form.style.display = "none";
 
